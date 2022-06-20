@@ -17,7 +17,7 @@ This project provides a complete example that shows every aspect that needs to b
 ## Installation
 Required python packages are torch, numpy, and cv2. To run the demo, you also need to have Jupyter Notebook. Once you have those installed, run make.sh. This script will download the Pascal VOC 2007 test set and the pretrained model. If for some reason the script doesn't work. You can manually download the data from this [link](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar) and the model from this [link](https://drive.google.com/file/d/1ZGyOpyN0ho64pEUZxAsMskK3zprNOAFg/view?usp=sharing). Untar the data and place both the data and the model in the root directory of the project. Your folder should look like this:\
 VOCdevkit\
-&nbsp;resnet18_pascal.pth\
+resnet18_pascal.pth\
 README.md\
 datasets.py\
 demo.ipynb\
