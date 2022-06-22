@@ -127,7 +127,7 @@ class AP(object):
         # bounding boxes can match with the same ground truth bounding
         # box. For example, in image b, the i_1st predicted bounding
         # box and the i_2nd predicted bounding box can both match
-        # with the jth predicted bounding box. In other words,
+        # with the jth ground truth bounding box. In other words,
         # idxs_one_hot[b][i_1][j] = idxs_one_hot[b][i_2][j] = 1. However,
         # only the i_1st predicted bounding box is a true positive.
         # To solve this problem, we first permute idxs_one_hot so that
