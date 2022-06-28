@@ -6,7 +6,7 @@ The worst part is when you train an object detector from scratch and you wanna s
 
 I've been searching for an mAP implementation that can be plugged into a training loop just like classification accuracy. Despite my effort, I can't find any that can be used on the validation set after each training epoch. I mean, if you really want, you can exit the training loop, execute the mAP evaluation script, and start another training epoch. That is just too inefficient.
 
-I couldn't figure out why there's no official implementation from PyTorch or TensorFlow. Their engineers have no issue solving problems multitudes harder than this so what's the reason? I finally understand once I get to the bottom of mAP.
+I couldn't figure out why there's no official implementation from PyTorch or TensorFlow. Their engineers have no issue solving problems much harder than this so what's the reason? I finally understand once I get to the bottom of mAP.
 
 The number one reason that mAP was implemented in a sequential fashion is that the inputs do not have fixed dimensions. For any two different images, the numbers of ground truth bounding boxes are generally not the same, and the numbers of predicted bounding boxes may not be the same as well. However, parallel computing kernels usually require every sample in a batch to have a fixed length along each dimension.
 
