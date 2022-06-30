@@ -90,7 +90,7 @@ class PascalVOC(Dataset):
             self.num_objects.append(num_objects)
             
             if num_objects > self.max_objects:
-            	self.max_objects = num_objects
+                self.max_objects = num_objects
             
             for object_node in object_nodes:
                 bndbox_node = object_node.find('bndbox')
@@ -106,7 +106,7 @@ class PascalVOC(Dataset):
                 easy_flag = 1 - int(object_node.find('difficult').text)
                 easy_flags.append(easy_flag)
                 if easy_flag:
-                	self.easy_objects[label] += 1
+                    self.easy_objects[label] += 1
             
             self.ymins.append(np.array(ymins, dtype=np.float32))
             self.xmins.append(np.array(xmins, dtype=np.float32))
