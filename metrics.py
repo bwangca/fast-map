@@ -3,13 +3,14 @@ import torch
 
 class AP(object):
 
-    IOU_THRESH = 0.5
+    def __init__(self, num_classes, k_true, k_pred, easy_objects, decode, filt, restore, device, iou_thresh=0.5, use_07_metric=True):
 
-    def __init__(self, dataset, decode, filt, restore, device, use_07_metric=True):
+        self.num_classes = num_classes
+        
+        self.k_true = k_true
+        self.k_pred = k_pred
 
-        self.num_classes = len(dataset.CLASSES)
-        self.k_true = dataset.max_objects
-        self.easy_objects = dataset.easy_objects
+        self.easy_objects = easy_objects
 
         self.decode = decode # a decoder that transforms raw network input into bboxes with scores and labels
         self.k_pred = decode.k
@@ -19,6 +20,8 @@ class AP(object):
         self.restore = restore # a callable that transforms resized coordinates to actual coordinates in images
 
         self.device = device
+
+        self.iou_thresh = iou_thresh
 
         self.use_07_metric = use_07_metric
 
@@ -71,7 +74,7 @@ class AP(object):
         # We mark predicted bounding boxes who do not have an IoU
         # greater than the threshold with any ground truth bounding box
         # of the same class as false positives.
-        under_iou_mask = torch.max(ious, 1)[0] < self.IOU_THRESH
+        under_iou_mask = torch.max(ious, 1)[0] < self.iou_thresh
         # This tensor has the same as boxes_pred[...,0]. Each element
         # maps to a predicted bounding box. We would like to divide
         # the predicted bounding boxes into 3 categories, true positives,
@@ -99,7 +102,7 @@ class AP(object):
         # bounding box in image b, then idxs[b][i] = j. 
         ious, idxs = torch.max(ious, 1)
 
-        over_iou_mask = ious > self.IOU_THRESH
+        over_iou_mask = ious > self.iou_thresh
         # We first mark all the remaining predicted bounding boxes as false
         # positives. Next we will find the true positives among them.
         detections[over_iou_mask] = 1
