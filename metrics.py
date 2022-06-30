@@ -3,17 +3,16 @@ import torch
 
 class AP(object):
 
-    def __init__(self, num_classes, k_true, k_pred, easy_objects, decode, filt, restore, device, iou_thresh=0.5, use_07_metric=True):
-
-        self.num_classes = num_classes
+    def __init__(self, k_true, k_pred, num_classes, easy_objects, decode, filt, restore, device, iou_thresh=0.5, use_07_metric=True):
         
         self.k_true = k_true
         self.k_pred = k_pred
 
+        self.num_classes = num_classes
+
         self.easy_objects = easy_objects
 
-        self.decode = decode # a decoder that transforms raw network input into bboxes with scores and labels
-        self.k_pred = decode.k
+        self.decode = decode # a decoder that transforms raw network output into bboxes with scores and labels
 
         self.filt = filt # a callable that filters bboxes such as NMS
 
